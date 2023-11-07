@@ -11,7 +11,7 @@ template<typename T>
 class SegTree{
 private:
     vector<T> arr; T def;
-    function<bool(T, T)> compare;
+    const function<T(T, T)> combine;
     int size;
 
     void build(const vector<T>& inp, int l, int r, int p){
@@ -22,7 +22,7 @@ private:
         int m = (l+r)/2;
         this->build(inp, l, m, 2*p);
         this->build(inp, m+1, r, 2*p+1);
-        arr[p] = arr[2*p + !compare(arr[2*p], arr[2*p+1])];
+        arr[p] = combine(arr[2*p], arr[2*p+1]);
     }
 
     int index(const pair<int, int>& q, const pair<int, int>& k, const int p=1){
@@ -42,19 +42,19 @@ private:
         if(q.first>k.second || q.second<k.first) return def;
         T a = this->query(q,{k.first, (k.first+k.second)/2}, 2*p),
           b = this->query(q,{(k.first+k.second)/2+1, k.second}, 2*p+1);
-        return compare(a, b)?a:b;
+        return combine(a,b);
     }
 
     void update(int p){
         if(p<1) return;
-        arr[p] = arr[2*p+!compare(arr[2*p], arr[2*p+1])];
+        arr[p] = combine(arr[2*p], arr[2*p+1]);
         update(p/2);
     }
 
 public:
     SegTree(const vector<T>& inp, int def = INT_MIN, 
-    function<bool(T, T)> cmp = greater<T>{}) 
-    : compare(cmp), def(def) {
+    function<T(T, T)> cmp = [](T x,T y){return (x>y)?x:y;}) 
+    : combine(cmp), def(def) {
         size = inp.size();
         arr = vector<T>(size*4+1, def);
         this->build(inp, 0, inp.size()-1, 1);
@@ -80,6 +80,7 @@ public:
 int main(){
     SegTree<int> a({-1, 2, 4, 9});
     a.update(0, 100);
-    cout << a.query(1,3) << '\n';
+    cout << a.query(0,2) << '\n';
     a.update(0, -100);
+    cout << a.query(0,2) << '\n';
 }
