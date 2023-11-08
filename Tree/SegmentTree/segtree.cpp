@@ -25,30 +25,23 @@ private:
         arr[p] = combine(arr[2*p], arr[2*p+1]);
     }
 
-    int index(const pair<int, int>& q, const pair<int, int>& k, const int p=1){
-        if(q.first<=k.first && q.second>=k.second) return p;
-        if(q.first>k.second || q.second<k.first) return def;
-        T a = this->index(q,{k.first, (k.first+k.second)/2}, 2*p),
-          b = this->index(q,{(k.first+k.second)/2+1, k.second}, 2*p+1);
-        return (a!=def)?a:b;
-    }
-
-    int index(int idx){
-        return this->index({idx,idx},{0,size-1});
-    }
-
-    T query(const pair<int, int>& q, const pair<int, int>& k, const int p=1){
-        if(q.first<=k.first && q.second>=k.second) return arr[p];
-        if(q.first>k.second || q.second<k.first) return def;
-        T a = this->query(q,{k.first, (k.first+k.second)/2}, 2*p),
-          b = this->query(q,{(k.first+k.second)/2+1, k.second}, 2*p+1);
+    T query(int ql, int qr, int l, int r, int p=1){
+        if(ql<=l && qr>=r) return arr[p];
+        if(ql>r || qr<l) return def;
+        T a = this->query(ql, qr, l, (l+r)/2, 2*p),
+          b = this->query(ql, qr, (l+r)/2+1, r, 2*p+1);
         return combine(a,b);
     }
 
-    void update(int p){
-        if(p<1) return;
+    void update(int ql, int qr, int l, int r, int val, int p=1){
+        if(ql<=l && qr>=r){
+            arr[p] = val;
+            return;
+        }
+        if(ql>r || qr<l) return;
+        this->update(ql, qr, l, (l+r)/2, val, 2*p);
+        this->update(ql, qr, (l+r)/2+1, r, val, 2*p+1);
         arr[p] = combine(arr[2*p], arr[2*p+1]);
-        update(p/2);
     }
 
 public:
@@ -66,14 +59,11 @@ public:
     }
 
     T query(int a, int b){
-        return this->query({a,b}, {0, size-1});
+        return this->query(a,b, 0, size-1);
     }
 
     void update(int idx, int val){
-        int ind = this->index(idx);
-        if(ind==def) return;
-        arr[ind] = val;
-        update(ind/2);
+        update(idx, idx, 0, size-1, val);
     }
 };
 
