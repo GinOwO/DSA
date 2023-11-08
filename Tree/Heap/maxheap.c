@@ -74,5 +74,7 @@ int main(){
     }
     for(int i=1; i<h->tail; i++) printf("%d ", h->arr[i]); puts("");
     for(int i=0; i<n; i++) printf("%d ", pop(h)); puts("");
+    free(h->arr);
+    free(h);
     return 0;
 }
