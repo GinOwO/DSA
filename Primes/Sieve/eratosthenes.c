@@ -4,11 +4,10 @@
 
 int* sieve(int n){
     int* arr = (int*)malloc((n+1)*sizeof(int));
-    memset(arr, 1, sizeof(int)*(n+1));
+    arr[2]=1;
+    for(int i=3; i<=n; i+=2) arr[i]=1;
 
-    for(int i=0; i*i<=n; i++){
-        if(i<2) arr[i] = 0;
-        
+    for(int i=3; i*i<=n; i++){
         if(arr[i]){
             for(int j=i*i; j<=n; j+=i)
                 arr[j] = 0;
