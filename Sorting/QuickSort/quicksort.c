@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-#define swap(a, b) a^=b; b^=a; a^=b
+#define swap(a, b) {int t=a; a=b; b=t;}
 #define REP(n) for(int i=0; i<n; i++)
 
 void quicksort(int*, int, int);
@@ -18,16 +18,17 @@ int main(){
 void quicksort(int* arr, int l, int r){
     if(l<r){
         int q=partition(arr, l, r);
-        quicksort(arr,l,q);quicksort(arr,q+1,r);
+        quicksort(arr,l,q);
+        quicksort(arr,q+1,r);
     }
 }
 
 int partition(int* arr, int l, int r){
-    int pi = l;
+    int pi = l; l--; r++;
     while(1){
-        while(arr[l]<arr[pi]) l++;
-        while(arr[r]>arr[pi]) r--;
-        if(l<r) {swap(arr[l], arr[r]);}
-        else return r;
+        do l++; while(arr[l]<arr[pi]);
+        do r--; while(arr[r]>arr[pi]);
+        if(l>=r) return r;
+        else swap(arr[l], arr[r]);
     }
 }
