@@ -2,7 +2,8 @@
     "files.associations": {
         "ostream": "cpp",
         "math.h": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     },
     "C_Cpp.default.compilerPath": "/usr/lib64/ccache/g++"
 }

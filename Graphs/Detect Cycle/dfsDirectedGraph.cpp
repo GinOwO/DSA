@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// Time complexity: O(V + E), Space complexity: O(V)
+
 class Solution {
     bool dfs(const vector<vector<int>>& graph, int i, vector<int>& visited) {
         visited[i] = 2;
