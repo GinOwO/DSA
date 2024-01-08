@@ -3,5 +3,6 @@
         "ostream": "cpp",
         "math.h": "c",
         "iostream": "cpp"
-    }
+    },
+    "C_Cpp.default.compilerPath": "/usr/lib64/ccache/g++"
 }

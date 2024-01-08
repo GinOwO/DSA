@@ -36,11 +36,13 @@ MinHeap* insert(MinHeap* h, int n){
         h->tail = h->size = 1; h->def = INT_MAX;
         h->arr = (int*)malloc(sizeof(int)*h->size);
     }
+
     if(h->tail>=h->size){
         h->size = h->size*2+1;
         h->arr = (int*)realloc(h->arr, sizeof(int)*h->size);
         for(int i=h->tail; i<=h->size; i++) h->arr[i] = h->def;
     }
+    
     h->arr[h->tail] = n;
     perUp(h->arr, h->tail++);
     return h;

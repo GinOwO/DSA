@@ -21,34 +21,34 @@ double minimiseMaxDistance(const vector<int> &arr, int k){
         ld len = diff/ld(tc[idx]+1);
         pq.push({len, idx});
     }
-    
+
     return pq.top().first;
 }
 */
 
-int helper(const vector<int>& arr, ld d){
+int helper(const vector<int>& arr, ld d) {
     int cnt = 0;
-    for(int i=1; i<arr.size(); i++){
-        int k = (arr[i]-arr[i-1])/d;
-        if((arr[i]-arr[i-1])/d == k*d) k--;
-        cnt+=k;
+    for (int i = 1; i < arr.size(); i++) {
+        int k = (arr[i] - arr[i - 1]) / d;
+        if ((arr[i] - arr[i - 1]) / d == k * d) k--;
+        cnt += k;
     }
     return cnt;
 }
 
-double minimiseMaxDistance(const vector<int> &arr, int k){
-    ld l=0, r=INT_MIN, mid;
-    for(int i=1; i<arr.size(); i++) r = max(r, ld(arr[i]-arr[i-1]));
+double minimiseMaxDistance(const vector<int>& arr, int k) {
+    ld l = 0, r = INT_MIN, mid;
+    for (int i = 1; i < arr.size(); i++) r = max(r, ld(arr[i] - arr[i - 1]));
 
-    while(r-l>tol){
-        mid = (l+r)/(2.0);
+    while (r - l > tol) {
+        mid = (l + r) / (2.0);
         int cnt = helper(arr, mid);
-        if(cnt>k) l = mid;
+        if (cnt > k) l = mid;
         else r = mid;
     }
     return r;
 }
 
-int main(){
-    cout << minimiseMaxDistance({1,2,3,4,5,6,7}, 6) << '\n';
+int main() {
+    cout << minimiseMaxDistance({ 1,2,3,4,5,6,7 }, 6) << '\n';
 }
