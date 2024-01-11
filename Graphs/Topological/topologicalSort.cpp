@@ -18,8 +18,8 @@ using namespace std;
 class Solution {
     void dfs(vector<vector<int>>& graph, vector<int>& visited, stack<int>& stk, int start) {
         visited[start] = 1;
-        for (auto& v : graph[start]) {
-            if (!visited[v]) dfs(graph, visited, stk, v);
+        for ( auto& v : graph[start] ) {
+            if ( !visited[v] ) dfs(graph, visited, stk, v);
         }
         stk.push(start);
     }
@@ -30,12 +30,12 @@ public:
         stack<int> stk;
         vector<int> visited(n, 0);
 
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) dfs(adjList, visited, stk, i);
+        for ( int i = 0; i < n; i++ ) {
+            if ( !visited[i] ) dfs(adjList, visited, stk, i);
         }
 
         vector<int> ans;
-        while (!stk.empty()) {
+        while ( !stk.empty() ) {
             ans.push_back(stk.top());
             stk.pop();
         }
@@ -57,7 +57,7 @@ int main() {
     Solution s;
     vector<int> stk = s.topologicalSort(adjList);
 
-    for (auto& v : stk) cout << v << " ";
+    for ( auto& v : stk ) cout << v << " ";
     cout << endl;
 
     return 0;

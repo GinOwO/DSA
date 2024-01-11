@@ -7,19 +7,19 @@ using namespace std;
 
 int findKRotation(vector<int>& arr) {
     int l = 0, r = arr.size() - 1, mid, ans = 0;
-    while (l <= r) {
+    while ( l <= r ) {
         mid = l + r >> 1;
-        if (arr[l] <= arr[r]) {
-            int q = (arr[l] < arr[ans] ? l : mid);
-            return (arr[q] < arr[ans] ? q : ans);
+        if ( arr[l] <= arr[r] ) {
+            int q = ( arr[l] < arr[ans] ? l : mid );
+            return ( arr[q] < arr[ans] ? q : ans );
         }
 
-        if (arr[l] <= arr[mid]) {
-            ans = (arr[l] < arr[ans] ? l : ans);
+        if ( arr[l] <= arr[mid] ) {
+            ans = ( arr[l] < arr[ans] ? l : ans );
             l = mid + 1;
         }
         else {
-            ans = (arr[mid] < arr[ans] ? mid : ans);
+            ans = ( arr[mid] < arr[ans] ? mid : ans );
             r = mid - 1;
         }
     }

@@ -7,9 +7,9 @@ using namespace std;
 bool searchMatrix(vector<vector<int>>& matrix, int x) {
     int n = matrix.size();
     int row = 0, col = matrix[0].size() - 1;
-    while (row < n && col >= 0) {
-        if (matrix[row][col] == x) return 1;
-        if (matrix[row][col] > x) col--;
+    while ( row < n && col >= 0 ) {
+        if ( matrix[row][col] == x ) return 1;
+        if ( matrix[row][col] > x ) col--;
         else row++;
     }
     return 0;

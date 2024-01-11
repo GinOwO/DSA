@@ -18,21 +18,21 @@ public:
         vector<int> inDegree(n, 0), ans;
         queue<int> que;
 
-        for (int i = 0; i < n; i++) {
-            for (auto& v : adjList[i]) inDegree[v]++;
+        for ( int i = 0; i < n; i++ ) {
+            for ( auto& v : adjList[i] ) inDegree[v]++;
         }
 
-        for (int i = 0; i < n; i++) {
-            if (!inDegree[i]) que.push(i);
+        for ( int i = 0; i < n; i++ ) {
+            if ( !inDegree[i] ) que.push(i);
         }
 
-        while (!que.empty()) {
+        while ( !que.empty() ) {
             int curr = que.front();
             que.pop();
             ans.push_back(curr);
 
-            for (auto& v : adjList[curr]) {
-                if (--inDegree[v] == 0) que.push(v);
+            for ( auto& v : adjList[curr] ) {
+                if ( --inDegree[v] == 0 ) que.push(v);
             }
         }
 

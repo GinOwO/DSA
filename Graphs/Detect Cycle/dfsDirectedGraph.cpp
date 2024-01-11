@@ -8,11 +8,11 @@ class Solution {
     bool dfs(const vector<vector<int>>& graph, int i, vector<int>& visited) {
         visited[i] = 2;
 
-        for (auto& v : graph[i]) {
-            if (visited[v] == 0) {
-                if (dfs(graph, v, visited)) return true;
+        for ( auto& v : graph[i] ) {
+            if ( visited[v] == 0 ) {
+                if ( dfs(graph, v, visited) ) return true;
             }
-            else if (visited[v] == 2) {
+            else if ( visited[v] == 2 ) {
                 return true;
             }
         }
@@ -26,9 +26,9 @@ public:
         int n = graph.size();
         vector<int> visited(n, 0);
 
-        for (int i = 0; i < n; i++) {
-            if (visited[i] == 0) {
-                if (dfs(graph, i, visited)) return true;
+        for ( int i = 0; i < n; i++ ) {
+            if ( visited[i] == 0 ) {
+                if ( dfs(graph, i, visited) ) return true;
             }
         }
         return false;
@@ -46,7 +46,7 @@ int main() {
 
     vector<bool> answer = { true, false, true, true };
 
-    for (int i = 0; i < testCasesAdjList.size(); i++) {
+    for ( int i = 0; i < testCasesAdjList.size(); i++ ) {
         cout << "Test case " << i + 1;
         assert(s.detectCycle(testCasesAdjList[i]) == answer[i]);
         cout << "\tPassed" << endl;

@@ -6,8 +6,8 @@ using namespace std;
 
 unsigned helper(vector<int>& arr, int cap) {
     unsigned d = 0, tot = 0;
-    for (auto& c : arr) {
-        if (tot + c > cap) tot = 0, d++;
+    for ( auto& c : arr ) {
+        if ( tot + c > cap ) tot = 0, d++;
         tot += c;
     }
     return d;
@@ -15,14 +15,14 @@ unsigned helper(vector<int>& arr, int cap) {
 
 int shipWithinDays(vector<int>& arr, int d) {
     int l = INT_MIN, r = 0, mid;
-    for (auto& c : arr) {
-        if (l < c) l = c;
+    for ( auto& c : arr ) {
+        if ( l < c ) l = c;
         r += c;
     }
 
-    while (l <= r) {
+    while ( l <= r ) {
         mid = l + r >> 1;
-        if (helper(arr, mid) >= d) l = mid + 1;
+        if ( helper(arr, mid) >= d ) l = mid + 1;
         else r = mid - 1;
     }
     return r + 1;

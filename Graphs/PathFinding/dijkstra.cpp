@@ -6,12 +6,18 @@
 
 using namespace std;
 
+/*
+    Dijkstra Algorithm: Single source shortest path in a graph.
+
+    Time complexity: O(ElogV), Space complexity: O(V)
+*/
+
 class Graph { // Directed
     vector<vector<pair<int, int>>> adj;
     int size;
 
     void path(vector<int>& v, int n) {
-        if (v[n] == -1) cout << n;
+        if ( v[n] == -1 ) cout << n;
         else {
             path(v, v[n]);
             cout << " -> " << n;
@@ -21,7 +27,7 @@ class Graph { // Directed
 public:
     Graph(vector<vector<int>>& edges) {
         adj.reserve(size = edges.size());
-        for (auto& v : edges) addEdge(v);
+        for ( auto& v : edges ) addEdge(v);
     }
 
     void addEdge(vector<int>& v) {
@@ -38,21 +44,21 @@ public:
         vector<int> prev(size, -1);
         dist[n1] = 0;
 
-        while (!q.empty()) {
+        while ( !q.empty() ) {
             n = q.top().second; q.pop();
-            if (visited[n]) continue;
+            if ( visited[n] ) continue;
             visited[n] = 1;
 
-            for (auto& v : adj[n]) {
+            for ( auto& v : adj[n] ) {
                 int d = dist[n] + v.second;
-                if (d < dist[v.first]) {
+                if ( d < dist[v.first] ) {
                     dist[v.first] = d;
                     prev[v.first] = n;
                     q.push({ d,v.first });
                 }
             }
         }
-        if (dist[n2] == INT_MAX) {
+        if ( dist[n2] == INT_MAX ) {
             cout << "No path found" << endl;
             return;
         }

@@ -3,7 +3,10 @@
         "ostream": "cpp",
         "math.h": "c",
         "iostream": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "deque": "cpp",
+        "string": "cpp"
     },
-    "C_Cpp.default.compilerPath": "/usr/lib64/ccache/g++"
+    "C_Cpp.default.compilerPath": "/usr/lib64/ccache/g++",
+    "editor.formatOnPaste": false
 }

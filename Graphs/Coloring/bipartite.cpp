@@ -10,11 +10,11 @@ public:
     bool dfs(const vector<vector<int>>& graph, int i, int prev, int color[]) {
         color[i] = prev;
 
-        for (auto& v : graph[i]) {
-            if (color[v] == -1) {
-                if (!dfs(graph, v, !prev, color)) return false;
+        for ( auto& v : graph[i] ) {
+            if ( color[v] == -1 ) {
+                if ( !dfs(graph, v, !prev, color) ) return false;
             }
-            else if (color[v] == color[i]) {
+            else if ( color[v] == color[i] ) {
                 return false;
             }
         }
@@ -26,16 +26,16 @@ public:
         que.push(start);
         color[start] = 0;
 
-        while (!que.empty()) {
+        while ( !que.empty() ) {
             int i = que.front();
             que.pop();
 
-            for (auto& v : graph[i]) {
-                if (color[v] == -1) {
+            for ( auto& v : graph[i] ) {
+                if ( color[v] == -1 ) {
                     color[v] = !color[i];
                     que.push(v);
                 }
-                else if (color[v] == color[i]) {
+                else if ( color[v] == color[i] ) {
                     return false;
                 }
             }
@@ -46,9 +46,9 @@ public:
     bool isBipartite(vector<vector<int>>& graph) {
         memset(color, -1, sizeof(int) * 101);
 
-        for (int i = 0; i < graph.size(); i++) {
-            if (color[i] == -1) {
-                if (!bfs(graph, i, color)) return false;
+        for ( int i = 0; i < graph.size(); i++ ) {
+            if ( color[i] == -1 ) {
+                if ( !bfs(graph, i, color) ) return false;
                 // if(!dfs(graph, i, 0, color)) return false;
             }
         }

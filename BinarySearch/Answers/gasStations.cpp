@@ -28,9 +28,9 @@ double minimiseMaxDistance(const vector<int> &arr, int k){
 
 int helper(const vector<int>& arr, ld d) {
     int cnt = 0;
-    for (int i = 1; i < arr.size(); i++) {
-        int k = (arr[i] - arr[i - 1]) / d;
-        if ((arr[i] - arr[i - 1]) / d == k * d) k--;
+    for ( int i = 1; i < arr.size(); i++ ) {
+        int k = ( arr[i] - arr[i - 1] ) / d;
+        if ( ( arr[i] - arr[i - 1] ) / d == k * d ) k--;
         cnt += k;
     }
     return cnt;
@@ -38,12 +38,12 @@ int helper(const vector<int>& arr, ld d) {
 
 double minimiseMaxDistance(const vector<int>& arr, int k) {
     ld l = 0, r = INT_MIN, mid;
-    for (int i = 1; i < arr.size(); i++) r = max(r, ld(arr[i] - arr[i - 1]));
+    for ( int i = 1; i < arr.size(); i++ ) r = max(r, ld(arr[i] - arr[i - 1]));
 
-    while (r - l > tol) {
-        mid = (l + r) / (2.0);
+    while ( r - l > tol ) {
+        mid = ( l + r ) / ( 2.0 );
         int cnt = helper(arr, mid);
-        if (cnt > k) l = mid;
+        if ( cnt > k ) l = mid;
         else r = mid;
     }
     return r;

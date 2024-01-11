@@ -42,18 +42,18 @@ Node* rightRot(Node* x) {
 }
 
 Node* insert(Node* node, int data) {
-    if (node == NULL) return newNode(data);
-    if (data < node->data) node->left = insert(node->left, data);
+    if ( node == NULL ) return newNode(data);
+    if ( data < node->data ) node->left = insert(node->left, data);
     else node->right = insert(node->right, data);
     setHeight(node);
     int b = balance(node);
 
-    if (b > 1) {
-        if (data > node->left->data) node->left = leftRot(node->left);
+    if ( b > 1 ) {
+        if ( data > node->left->data ) node->left = leftRot(node->left);
         return rightRot(node);
     }
-    if (b < -1) {
-        if (data < node->right->data) node->right = rightRot(node->right);
+    if ( b < -1 ) {
+        if ( data < node->right->data ) node->right = rightRot(node->right);
         return leftRot(node);
     }
     return node;
@@ -64,20 +64,20 @@ int cmp(const void* a, const void* b) {
 }
 
 Node* minElement(Node* node) {
-    if (node == NULL || node->left == NULL) return node;
+    if ( node == NULL || node->left == NULL ) return node;
     return minElement(node->left);
 }
 
 Node* del(Node* root, int data) {
-    if (root == NULL)
+    if ( root == NULL )
         return root;
 
-    if (data < root->data) root->left = del(root->left, data);
-    else if (data > root->data) root->right = del(root->right, data);
+    if ( data < root->data ) root->left = del(root->left, data);
+    else if ( data > root->data ) root->right = del(root->right, data);
     else {
-        if (root->left == NULL || root->right == NULL) {
+        if ( root->left == NULL || root->right == NULL ) {
             Node* temp = root->left ? root->left : root->right;
-            if (temp == NULL) {
+            if ( temp == NULL ) {
                 temp = root;
                 root = NULL;
             }
@@ -91,20 +91,20 @@ Node* del(Node* root, int data) {
         }
     }
 
-    if (root == NULL) return root;
+    if ( root == NULL ) return root;
 
     setHeight(root);
     int bf = balance(root);
-    if (bf > 1) {
-        if (balance(root->left) >= 0) return rightRot(root);
+    if ( bf > 1 ) {
+        if ( balance(root->left) >= 0 ) return rightRot(root);
         else {
             root->left = leftRot(root->left);
             return rightRot(root);
         }
     }
 
-    if (bf < -1) {
-        if (balance(root->right) <= 0) return leftRot(root);
+    if ( bf < -1 ) {
+        if ( balance(root->right) <= 0 ) return leftRot(root);
         else {
             root->right = rightRot(root->right);
             return leftRot(root);
@@ -115,14 +115,14 @@ Node* del(Node* root, int data) {
 
 
 void levelOrder(Node* root) {
-    if (root == NULL) return;
+    if ( root == NULL ) return;
     Node* queue[100]; int front = 0, rear = 0;
     queue[rear++] = root;
-    while (front != rear) {
+    while ( front != rear ) {
         Node* temp = queue[front++];
         printf("%d ", temp->data);
-        if (temp->left) queue[rear++] = temp->left;
-        if (temp->right) queue[rear++] = temp->right;
+        if ( temp->left ) queue[rear++] = temp->left;
+        if ( temp->right ) queue[rear++] = temp->right;
     }
     printf("\n");
 }
@@ -130,10 +130,10 @@ void levelOrder(Node* root) {
 
 int main() {
     int n; scanf("%d", &n); int arr[n];
-    for (int i = 0; i < n; i++) scanf("%d", arr + i);
+    for ( int i = 0; i < n; i++ ) scanf("%d", arr + i);
 
     Node* root = NULL;
-    for (int i = 0; i < n; i++) root = insert(root, arr[i]);
+    for ( int i = 0; i < n; i++ ) root = insert(root, arr[i]);
     levelOrder(root);
     root = del(root, 7);
     levelOrder(root);
