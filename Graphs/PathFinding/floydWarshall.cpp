@@ -13,6 +13,8 @@ using namespace std;
         The distance of (i, j) will be the minimum of the distance of (i, j) and the sum of the distance of (i, k) and (k, j).
         We do this for all the vertices, then we convert 1e9 back to -1.
 
+        If a negative cycle exists, then the distance of (i, i) will be negative.
+
         Time complexity: O(V^3), Space complexity: O(V^2)
 */
 
