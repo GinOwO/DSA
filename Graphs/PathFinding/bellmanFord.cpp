@@ -20,6 +20,11 @@ using namespace std;
 
 
         Time complexity: O(|V|*|E|), Space complexity: O(V)
+
+        Note: We are checking for dist[u] != 1e9 because if the distance is 1e9, it means that the vertex has
+            not been visited yet. If we don't check for this, then we will get a wrong answer as if the distance
+            to be added is negative, then it will update the distance of the next vertex even if no path from
+            source to current vertex exists.
 */
 
 class Solution {
@@ -32,7 +37,7 @@ public:
         for ( int i = 1; i < n; i++ ) {
             for ( auto& edge : edges ) {
                 int u = edge[0], v = edge[1], w = edge[2];
-                if ( dist[u] + w < dist[v] ) {
+                if ( dist[u] != 1e9 && dist[u] + w < dist[v] ) {
                     dist[v] = dist[u] + w;
                 }
             }
@@ -41,7 +46,7 @@ public:
         // Check if there is a negative cycle, if yes return { -1 } to indicate it.
         for ( auto& edge : edges ) {
             int u = edge[0], v = edge[1], w = edge[2];
-            if ( dist[u] + w < dist[v] ) {
+            if ( dist[u] != 1e9 && dist[u] + w < dist[v] ) {
                 return { -1 };
             }
         }
