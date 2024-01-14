@@ -24,12 +24,6 @@ using namespace std;
 
 class DisjointSetSize {
     vector<int> parent, size;
-
-    int findParent(int node) {
-        if ( parent[node] == node ) return node;
-        return parent[node] = findParent(parent[node]);
-    }
-
 public:
     DisjointSetSize(int n) : parent(n + 1), size(n + 1, 1) {
         for ( int i = 0; i <= n; i++ ) {
@@ -57,8 +51,9 @@ public:
         return findParent(u) == findParent(v);
     }
 
-    int find(int node) {
-        return findParent(node);
+    int findParent(int node) {
+        if ( parent[node] == node ) return node;
+        return parent[node] = findParent(parent[node]);
     }
 };
 

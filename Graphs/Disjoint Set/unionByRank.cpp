@@ -24,12 +24,6 @@ using namespace std;
 
 class DisjointSetRank {
     vector<int> parent, rank;
-
-    int findParent(int node) {
-        if ( parent[node] == node ) return node;
-        return parent[node] = findParent(parent[node]);
-    }
-
 public:
     DisjointSetRank(int n) : parent(n + 1), rank(n + 1, 0) {
         for ( int i = 0; i <= n; i++ ) {
@@ -59,8 +53,9 @@ public:
         return findParent(u) == findParent(v);
     }
 
-    int find(int node) {
-        return findParent(node);
+    int findParent(int node) {
+        if ( parent[node] == node ) return node;
+        return parent[node] = findParent(parent[node]);
     }
 };
 
