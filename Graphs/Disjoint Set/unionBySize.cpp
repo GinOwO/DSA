@@ -55,6 +55,10 @@ public:
         if ( parent[node] == node ) return node;
         return parent[node] = findParent(parent[node]);
     }
+
+    int findSize(int node) {
+        return size[findParent(node)];
+    }
 };
 
 int main(void) {
