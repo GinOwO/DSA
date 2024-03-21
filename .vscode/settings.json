@@ -5,7 +5,8 @@
         "iostream": "cpp",
         "vector": "cpp",
         "deque": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "regex": "cpp"
     },
     "C_Cpp.default.compilerPath": "/usr/lib64/ccache/g++",
     "editor.formatOnPaste": false
